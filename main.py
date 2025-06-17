@@ -26,39 +26,39 @@ async def send_page(update, context, page): if update.callback_query: chat_id = 
 
 if page == 1:
     keyboard = [
-        [InlineKeyboardButton("\ud83d\udd11 \u09b8\u09be\u0987\u09a8\u0986\u09aa / \u09b8\u09be\u0987\u09a8\u0987\u09a8", callback_data="auth")],
-        [InlineKeyboardButton("\ud83c\udfae \u09ad\u09bf\u09a1\u09bf\u0993 \u098f\u09a1\u09bf\u099f", callback_data="video_edit")],
-        [InlineKeyboardButton("\ud83d\uddbc\ufe0f \u09ab\u099f\u09cb \u098f\u09a1\u09bf\u099f", callback_data="photo_edit")],
-        [InlineKeyboardButton("\ud83d\udcbc CapCut/Remini Pro", callback_data="capcut")],
-        [InlineKeyboardButton("\ud83d\udee0\ufe0f \u0993\u09af\u09bc\u09c7\u09ac/\u09b8\u09ab\u099f\u0993\u09af\u09bc\u09be\u09b0 \u0985\u09b0\u09cd\u09a1\u09be\u09b0", callback_data="web_order")],
-        [InlineKeyboardButton("\u27a1\ufe0f \u09aa\u09b0\u09c7\u09b0 \u09aa\u09c7\u099c", callback_data="page_2")]
+        [InlineKeyboardButton("🔑 সাইনআপ / সাইনইন", callback_data="auth")],
+        [InlineKeyboardButton("🎮 ভিডিও এডিট", callback_data="video_edit")],
+        [InlineKeyboardButton("🖼️ ফটো এডিট", callback_data="photo_edit")],
+        [InlineKeyboardButton("💼 CapCut/Remini Pro", callback_data="capcut")],
+        [InlineKeyboardButton("🛠️ ওয়েব/সফটওয়্যার অর্ডার", callback_data="web_order")],
+        [InlineKeyboardButton("➡️ পরের পেজ", callback_data="page_2")]
     ]
 elif page == 2:
     keyboard = [
-        [InlineKeyboardButton("\ud83d\udcf1 SMM \u09b8\u09be\u09b0\u09cd\u09ad\u09bf\u09b8", callback_data="smm")],
-        [InlineKeyboardButton("\ud83e\udd16 \u0993\u09af\u09bc\u09be\u099c\u09bf\u09ab\u09be AI", callback_data="wazifa_ai")],
-        [InlineKeyboardButton("\ud83e\udeb0 Nur AI", callback_data="nur_ai")],
-        [InlineKeyboardButton("\ud83d\udcde \u0995\u09be\u09b8\u09cd\u099f\u09ae\u09be\u09b0 \u0995\u09c7\u09af\u09bc\u09be\u09b0", callback_data="customer_care")],
-        [InlineKeyboardButton("\u2b05\ufe0f \u09aa\u09c7\u099b\u09a8\u09c7\u09b0 \u09aa\u09c7\u099c", callback_data="page_1"), InlineKeyboardButton("\u27a1\ufe0f \u09aa\u09c7\u099c \u09e9", callback_data="page_3")]
+        [InlineKeyboardButton("📱 SMM সার্ভিস", callback_data="smm")],
+        [InlineKeyboardButton("🤖 ওয়াজিফা AI", callback_data="wazifa_ai")],
+        [InlineKeyboardButton("🪠 Nur AI", callback_data="nur_ai")],
+        [InlineKeyboardButton("📞 কাস্টমার কেয়ার", callback_data="customer_care")],
+        [InlineKeyboardButton("⬅️ পেছনের পেজ", callback_data="page_1"), InlineKeyboardButton("➡️ পেজ ৩", callback_data="page_3")]
     ]
 else:
     keyboard = [
-        [InlineKeyboardButton("\ud83d\udcf2 \u099f\u09c7\u09b2\u09bf\u0995\u09ae \u09aa\u09cd\u09af\u09be\u0995", callback_data="telecom")],
-        [InlineKeyboardButton("\ud83d\udd25 \u0997\u09c7\u09ae \u099f\u09aa\u0986\u09aa", callback_data="topup")],
-        [InlineKeyboardButton("\ud83d\udcb3 \u098f\u09a1 \u09ac\u09cd\u09af\u09be\u09b2\u09c7\u09a8\u09cd\u09b8", callback_data="balance")],
-        [InlineKeyboardButton("\u2b05\ufe0f \u09aa\u09c7\u099b\u09a8\u09c7\u09b0 \u09aa\u09c7\u099c", callback_data="page_2")]
+        [InlineKeyboardButton("📲 টেলিকম প্যাক", callback_data="telecom")],
+        [InlineKeyboardButton("🔥 গেম টপআপ", callback_data="topup")],
+        [InlineKeyboardButton("💳 এড ব্যালেন্স", callback_data="balance")],
+        [InlineKeyboardButton("⬅️ পেছনের পেজ", callback_data="page_2")]
     ]
 
 reply_markup = InlineKeyboardMarkup(keyboard)
 await context.bot.send_message(
     chat_id=chat_id,
-    text="\ud83d\udce6 \u09a8\u09bf\u099a\u09c7 \u09a5\u09c7\u0995\u09c7 \u0986\u09aa\u09a8\u09be\u09b0 \u09aa\u09cd\u09b0\u09af\u09cb\u099c\u09a8\u09c0\u09af\u09bc \u09b8\u09be\u09b0\u09cd\u09ad\u09bf\u09b8 \u09ac\u09c7\u099b\u09c7 \u09a8\u09bf\u09a8:",
+    text="📦 নিচে থেকে আপনার প্রয়োজনীয় সার্ভিস বেছে নিন:",
     reply_markup=reply_markup
 )
 
 Callback handler
 
-async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE): data = update.callback_query.data if data.startswith("page_"): page_num = int(data.split("_")[1]) await send_page(update, context, page_num) elif data == "auth": await auth(update, context) else: await update.callback_query.answer("\ud83d\udea7 \u09ab\u09bf\u099a\u09be\u09b0\u099f\u09bf \u098f\u0996\u09a8\u09cb \u09a4\u09cd\u09af\u09be\u09b0\u09bf \u09b9\u099a\u09cd\u099b\u09c7!", show_alert=True)
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE): data = update.callback_query.data if data.startswith("page_"): page_num = int(data.split("_")[1]) await send_page(update, context, page_num) elif data == "auth": await auth(update, context) else: await update.callback_query.answer("🚧 ফিচারটি এখনো তৈরি হচ্ছে!", show_alert=True)
 
 Run Bot
 
