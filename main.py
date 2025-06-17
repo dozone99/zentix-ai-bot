@@ -10,7 +10,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 # Start Command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [["📦 মেনু"]]
-    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
     await update.message.reply_text(
         "🌟 স্বাগতম *Zentix Ai Bot* -এ!\n\n"
         "🤖 আমি আপনার ব্যক্তিগত AI সহকারী।\n\n"
@@ -79,7 +79,7 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("menu", menu))
 app.add_handler(CallbackQueryHandler(handle_callback))
 
-# ✅ এই লাইনটা নতুন যোগ হয়েছে: বাটন '📦 মেনু' চাপলে কাজ করাবে
-app.add_handler(MessageHandler(filters.TEXT & filters.Regex("📦 মেনু"), menu))
+# ✅ এখন যেকোনো বার্তায় যদি "মেনু" শব্দ থাকে — কাজ করবে
+app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"মেনু"), menu))
 
 app.run_polling()
