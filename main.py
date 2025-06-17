@@ -53,7 +53,7 @@ async def send_page(update, context, page):
         keyboard = [
             [InlineKeyboardButton("📲 টেলিকম প্যাক", callback_data="telecom")],
             [InlineKeyboardButton("🔥 গেম টপআপ", callback_data="topup")],
-            [InlineKeyboardButton("💳 ব্যালেন্স", callback_data="balance")],
+            [InlineKeyboardButton("💳 এড ব্যালেন্স", callback_data="balance")],
             [InlineKeyboardButton("⬅️ পেছনের পেজ", callback_data="page_2")]
         ]
 
