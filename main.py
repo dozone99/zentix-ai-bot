@@ -1,5 +1,5 @@
 import os
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
 from dotenv import load_dotenv
 
@@ -10,9 +10,14 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Start Command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [["📦 মেনু"]]
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     await update.message.reply_text(
-        "👋 স্বাগতম Zentix Ai Bot-এ!\n\n"
-        "📌 মেনু দেখতে নিচের '📦 মেনু' বাটনে ক্লিক করুন।"
+        "🌟 স্বাগতম `Zentix Ai Bot`-এ!\n\n"
+        "🤖 আমি আপনার ব্যক্তিগত AI সহকারী।\n\n"
+        "📦 মেনু দেখতে নিচের '📦 মেনু' বাটনে ক্লিক করুন —\n"
+        "নতুন প্রযুক্তির সাথে যুক্ত হোন এক ক্লিকে।",
+        reply_markup=reply_markup
     )
 
 
