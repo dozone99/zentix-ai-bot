@@ -2,7 +2,7 @@ import os from telegram import Update, InlineKeyboardButton, InlineKeyboardMarku
 
 Load environment variables
 
-load_dotenv() BOT_TOKEN = os.getenv("BOT_TOKEN")
+load_dotenv() BOT_TOKEN = os.getenv("BOT_TOKEN"7159330228:AAHyMNUaq0wqfLLH3Mv9R9Z_DvzTm7GccMI)
 
 Start Command
 
