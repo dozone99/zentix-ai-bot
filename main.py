@@ -35,7 +35,7 @@ async def send_page(update, context, page):
 
     if page == 1:
         keyboard = [
-            [InlineKeyboardButton("🔑 সাইনআপ / সাইনইন", callback_data="auth")],
+            [InlineKeyboardButtonInlineKeyboardButton("🔑 সাইনআপ / সাইনইন", callback_data="auth")],
             [InlineKeyboardButton("🎬 ভিডিও এডিট", callback_data="video_edit")],
             [InlineKeyboardButton("🖼️ ফটো এডিট", callback_data="photo_edit")],
             [InlineKeyboardButton("📼 CapCut/Remini Pro", callback_data="capcut")],
