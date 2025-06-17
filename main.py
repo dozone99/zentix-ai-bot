@@ -4,6 +4,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandle
 from dotenv import load_dotenv
 
 # Load environment variables
+from auth_handler import auth_handler
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")  # 🛡️ এখানে টোকেন ENV থেকে আসবে
 
@@ -81,5 +82,5 @@ app.add_handler(CallbackQueryHandler(handle_callback))
 
 # ✅ যেকোনো 'মেনু' লিখলেই বাটন আসবে
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"মেনু"), menu))
-
+app.add_handler(CallbackQueryHandler(auth_handler, pattern="^auth$"))
 app.run_polling()
