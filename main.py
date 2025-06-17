@@ -1,4 +1,4 @@
-import os from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, ContextTypes, filters from dotenv import load_dotenv
+import os from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup from telegram.ext import ( ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, ContextTypes, filters, ) from dotenv import load_dotenv
 
 Load environment variables
 
@@ -9,6 +9,9 @@ In-memory user storage
 user_db = {}
 
 Start Command
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE): keyboard = [["\ud83d\udce6 \u09ae\u09c7\u09a8\u09c1"]] reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True) await update.message.reply_text( "\ud83c\udf1f \u09b8\u09cd\u09ac\u09be\u0997\u09a4\u09ae Zentix Ai Bot -\u098f!\n\n" "\ud83e\udd16 \u0986\u09ae\u09bf \u0986\u09aa\u09a8\u09be\u09b0 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf\u0997\u09a4 AI \u09b8\u09b9\u0995\u09be\u09b0\u09c0\u09c0\u0964\n\n" "\ud83d\udce6 \u09ae\u09c7\u09a8\u09c1 \u09a6\u09c7\u0996\u09a4\u09c7 \u09a8\u09bf\u099a\u09c7\u09b0 '\ud83d\udce6 \u09ae\u09c7\u09a8\u09c1' \u09ac\u09be\u099f\u09a8\u09c7 \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09c1\u09a8 \u2014\n" "\u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b0 \u09b8\u09be\u09a5\u09c7 \u09af\u09c1\u0995\u09cd\u09a4 \u09b9\u09cb\u09a8 \u098f\u0995 \u0995\u09cd\u09b2\u09bf\u0995\u09c7\u0964", reply_markup=reply_markup, parse_mode="Markdown" )
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE): keyboard = [["\ud83d\udce6 \u09ae\u09c7\u09a8\u09c1"]] reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True) await update.message.reply_text( "\ud83c\udf1f \u09b8\u09cd\u09ac\u09be\u0997\u09a4\u09ae Zentix Ai Bot -\u098f!\n\n" "\ud83e\udd16 \u0986\u09ae\u09bf \u0986\u09aa\u09a8\u09be\u09b0 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf\u0997\u09a4 AI \u09b8\u09b9\u0995\u09be\u09b0\u09c0\u09c0\u0964\n\n" "\ud83d\udce6 \u09ae\u09c7\u09a8\u09c1 \u09a6\u09c7\u0996\u09a4\u09c7 \u09a8\u09bf\u099a\u09c7\u09b0 '\ud83d\udce6 \u09ae\u09c7\u09a8\u09c1' \u09ac\u09be\u099f\u09a8\u09c7 \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09c1\u09a8 \u2014\n" "\u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b0 \u09b8\u09be\u09a5\u09c7 \u09af\u09c1\u0995\u09cd\u09a4 \u09b9\u09cb\u09a8 \u098f\u0995 \u0995\u09cd\u09b2\u09bf\u0995\u09c7\u0964", reply_markup=reply_markup, parse_mode="Markdown" )
 
