@@ -35,7 +35,7 @@ async def send_page(update, context, page):
 
     if page == 1:
         keyboard = [
-            [InlineKeyboardButtonInlineKeyboardButton("🔑 সাইনআপ / সাইনইন", callback_data="auth")],
+            [InlineKeyboardButton("🔑 সাইনআপ / সাইনইন", callback_data="auth")],
             [InlineKeyboardButton("🎬 ভিডিও এডিট", callback_data="video_edit")],
             [InlineKeyboardButton("🖼️ ফটো এডিট", callback_data="photo_edit")],
             [InlineKeyboardButton("📼 CapCut/Remini Pro", callback_data="capcut")],
@@ -82,5 +82,5 @@ app.add_handler(CallbackQueryHandler(handle_callback))
 
 # ✅ যেকোনো 'মেনু' লিখলেই বাটন আসবে
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"মেনু"), menu))
-app.add_handler(CallbackQueryHandler(auth_handler, pattern="^auth$"))
+app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"(মেনু|📦 মেনু)"), menu))
 app.run_polling()
