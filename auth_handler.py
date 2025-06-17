@@ -1,10 +1,10 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-# 🔐 ইন-মেমোরি ডাটাবেজ
+# 🔐 ইন-মেমোরি ডাটাবেস
 user_db = {}
 
-# 🧠 সাইনআপ / সাইনইন ফাংশন
+# 🔐 সাইনআপ / সাইনইন হ্যান্ডলার
 async def auth_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     name = update.effective_user.full_name
@@ -12,7 +12,7 @@ async def auth_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if user_id in user_db:
         await update.callback_query.answer(
-            "✅ আপনি ইতিমধ্যে রেজিস্ট্রেশন করেছেন।", show_alert=True
+            "✅ আপনি ইতিমধ্যেই রেজিস্টার্ড করেছেন!", show_alert=True
         )
     else:
         user_db[user_id] = {
@@ -20,5 +20,6 @@ async def auth_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "username": username
         }
         await update.callback_query.answer(
-            f"📅 ধন্যবাদ {name}!\nআপনার একাউন্ট তৈরি হয়েছে।", show_alert=True
+            f"✅ ধন্যবাদ {name}!\nআপনার একাউন্ট তৈরি হয়েছে!",
+            show_alert=True
         )
