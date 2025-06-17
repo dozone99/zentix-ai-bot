@@ -1,25 +1,30 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-# 🔐 ইন-মেমোরি ডাটাবেস
+# 🔐 ইন-মেমোরি ডাটাবেজ
 user_db = {}
 
-# 🔐 সাইনআপ / সাইনইন হ্যান্ডলার
+# 📍 স্টেট ডিফাইন
+ASK_NAME = 1
+
+# 📥 স্টার্ট সাইনআপ - বাটনে ক্লিক করলে
 async def auth_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.callback_query.answer()
+    await update.callback_query.message.reply_text("👤 দয়া করে আপনার *নাম* লিখুন:", parse_mode="Markdown")
+    return ASK_NAME
+
+# 📝 নাম গ্রহণ ও সংরক্ষণ
+async def save_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
-    name = update.effective_user.full_name
+    name = update.message.text
     username = update.effective_user.username or "NoUsername"
 
-    if user_id in user_db:
-        await update.callback_query.answer(
-            "✅ আপনি ইতিমধ্যেই রেজিস্টার্ড করেছেন!", show_alert=True
-        )
-    else:
-        user_db[user_id] = {
-            "name": name,
-            "username": username
-        }
-        await update.callback_query.answer(
-            f"✅ ধন্যবাদ {name}!\nআপনার একাউন্ট তৈরি হয়েছে!",
-            show_alert=True
-        )
+    user_db[user_id] = {
+        "name": name,
+        "username": username
+    }
+
+    await update.message.reply_text(
+        f"✅ ধন্যবাদ {name}!\nআপনার একাউন্ট সফলভাবে তৈরি হয়েছে।"
+    )
+    return -1  # end conversation
