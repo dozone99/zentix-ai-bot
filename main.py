@@ -71,6 +71,8 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if data.startswith("page_"):
         page_num = int(data.split("_")[1])
         await send_page(update, context, page_num)
+    elif data == "auth":
+        await auth_handler(update, context)
     else:
         await update.callback_query.answer("🚧 ফিচারটি এখনো তৈরি হচ্ছে!")
 
@@ -83,4 +85,5 @@ app.add_handler(CallbackQueryHandler(handle_callback))
 # ✅ যেকোনো 'মেনু' লিখলেই বাটন আসবে
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"মেনু"), menu))
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"(মেনু|📦 মেনু)"), menu))
+
 app.run_polling()
