@@ -1,30 +1,28 @@
 import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, ContextTypes, filters
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-
 # Start Command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [["📦 মেনু"]]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     await update.message.reply_text(
-        "🌟 স্বাগতম `Zentix Ai Bot`-এ!\n\n"
+        "🌟 স্বাগতম *Zentix Ai Bot* -এ!\n\n"
         "🤖 আমি আপনার ব্যক্তিগত AI সহকারী।\n\n"
         "📦 মেনু দেখতে নিচের '📦 মেনু' বাটনে ক্লিক করুন —\n"
         "নতুন প্রযুক্তির সাথে যুক্ত হোন এক ক্লিকে।",
-        reply_markup=reply_markup
+        reply_markup=reply_markup,
+        parse_mode="Markdown"
     )
-
 
 # Menu Command
 async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await send_page(update, context, 1)
-
 
 # Menu Pagination
 async def send_page(update, context, page):
@@ -66,7 +64,6 @@ async def send_page(update, context, page):
         reply_markup=reply_markup
     )
 
-
 # Callback handler
 async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     data = update.callback_query.data
@@ -76,11 +73,13 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.callback_query.answer("🚧 ফিচারটি এখনো তৈরি হচ্ছে!")
 
-
 # Run Bot
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("menu", menu))
 app.add_handler(CallbackQueryHandler(handle_callback))
+
+# ✅ এই লাইনটা নতুন যোগ হয়েছে: বাটন '📦 মেনু' চাপলে কাজ করাবে
+app.add_handler(MessageHandler(filters.TEXT & filters.Regex("📦 মেনু"), menu))
 
 app.run_polling()
