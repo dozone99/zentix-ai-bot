@@ -86,10 +86,9 @@ app.add_handler(CallbackQueryHandler(handle_callback))
 # ✅ যেকোনো 'মেনু' লিখলেই বাটন আসবে
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"মেনু"), menu))
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"(মেনু|📦 মেনু)"), menu))
-# ✅ Conversation handler for সাইনআপ
 conv_handler = ConversationHandler(
     entry_points=[CallbackQueryHandler(auth_handler, pattern="^auth$")],
     states={ASK_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, save_name)]},
     fallbacks=[],
-)states={ASK_NAME: [MessageHandler(filters.ALL, save_name)]},
-app.add_handler(conv_handler
+)
+app.add_handler(conv_handler)
